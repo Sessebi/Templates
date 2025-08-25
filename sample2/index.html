@@ -1,27 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Showcase</title>
-  <style>
-    body {margin:0; font-family:sans-serif; background:#fdfdfd;}
-    header {padding:30px; text-align:center; background:#222; color:#fff;}
-    h1 {margin:0;}
-    .projects {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; padding:40px;}
-    .project {background:#eee; border-radius:8px; padding:20px; text-align:center;}
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sebi — Portfolio Pro</title>
+<style>
+  :root{--bg:#0e1117;--card:#141925;--text:#e9edf6;--muted:#9aa7bd;--acc:#59c1ff;--max:1100px;--r:18px}
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 800px at 10% -10%,#1b2136,#0e1117),#0e1117;color:var(--text);font:15px/1.6 system-ui,Segoe UI,Roboto,Arial}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+  .nav{position:sticky;top:0;z-index:40;background:rgba(14,17,23,.65);backdrop-filter:blur(10px);border-bottom:1px solid #242b3f}
+  .nav .in{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+  .brand{display:flex;gap:10px;align-items:center}
+  .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#59c1ff,#9bffdc)}
+  .links{display:flex;gap:16px}
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:40px 0}
+  h1{font-size:clamp(28px,6vw,44px);margin:0}
+  .lead{color:#cbd6ea}
+  .card{background:linear-gradient(180deg,#141a2a,#121623);border:1px solid #26304a;border-radius:var(--r);padding:20px}
+  .skills{display:flex;gap:10px;flex-wrap:wrap}
+  .chip{border:1px solid #2b3653;border-radius:999px;padding:8px 12px;color:#bcd0ee;background:rgba(255,255,255,.04)}
+  /* FILTER */
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+  .btn{border:1px solid #2b3653;background:#121623;color:var(--text);border-radius:10px;padding:8px 12px;cursor:pointer}
+  .btn.active{outline:2px solid #3568a8}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .item{border:1px solid #2b3653;border-radius:14px;overflow:hidden;background:#111522;cursor:pointer}
+  .thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#2a3352,#171c2e);display:grid;place-items:center;color:#9fb4df}
+  .meta{padding:12px}
+  /* LIGHTBOX */
+  .light{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:24px}
+  .light .box{max-width:900px;width:100%;background:#0f1424;border:1px solid #2b3653;border-radius:16px;overflow:hidden}
+  .light .head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #273150}
+  .light .body{padding:16px}
+  .close{cursor:pointer}
+  /* CONTACT */
+  form input, form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #2b3653;background:#0e1323;color:var(--text)}
+  form textarea{min-height:110px;resize:vertical}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:620px){.links{display:none}.grid{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-  <header>
-    <h1>My Portfolio</h1>
-    <p>Responsive showcase of projects</p>
-  </header>
-  <section class="projects">
-    <div class="project">Landing Page</div>
-    <div class="project">E-commerce UI</div>
-    <div class="project">Blog Template</div>
-    <div class="project">Mobile App Design</div>
-  </section>
+<nav class="nav">
+  <div class="wrap in">
+    <div class="brand"><div class="dot"></div><b>Sebi</b></div>
+    <div class="links">
+      <a href="#about">About</a><a href="#work">Projects</a><a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap hero">
+  <div>
+    <h1>Frontend Developer & Problem-Solver</h1>
+    <p class="lead">I build fast, responsive websites and micro-apps with clean HTML/CSS and a focus on UX and performance.</p>
+    <div class="card" style="margin-top:14px">
+      <div class="skills">
+        <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">Responsive</span><span class="chip">Accessibility</span><span class="chip">Vanilla JS</span><span class="chip">React</span><span class="chip">Performance</span>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="thumb">Drop portfolio mockup image here</div>
+    <p style="color:#9fb4df;margin:10px 0 0">Lighthouse 95+ / Mobile-first</p>
+  </div>
+</header>
+
+<section id="work" class="wrap">
+  <h2>Projects</h2>
+  <div class="toolbar">
+    <button class="btn active" data-filter="all">All</button>
+    <button class="btn" data-filter="landing">Landing</button>
+    <button class="btn" data-filter="ecom">E-commerce</button>
+    <button class="btn" data-filter="app">Web App</button>
+  </div>
+  <div class="grid" id="grid">
+    <article class="item" data-tags="landing">
+      <div class="thumb">Landing — SaaS</div>
+      <div class="meta"><b>Nebula</b><div style="color:#9aa7bd">SaaS one-pager</div></div>
+    </article>
+    <article class="item" data-tags="ecom">
+      <div class="thumb">Storefront</div>
+      <div class="meta"><b>Mercury</b><div style="color:#9aa7bd">Minimal e-commerce</div></div>
+    </article>
+    <article class="item" data-tags="app">
+      <div class="thumb">Dashboard</div>
+      <div class="meta"><b>Orion</b><div style="color:#9aa7bd">Analytics micro-app</div></div>
+    </article>
+    <article class="item" data-tags="landing app">
+      <div class="thumb">Product</div>
+      <div class="meta"><b>Atlas</b><div style="color:#9aa7bd">Product page + demo</div></div>
+    </article>
+    <article class="item" data-tags="ecom">
+      <div class="thumb">Catalog</div>
+      <div class="meta"><b>Lyra</b><div style="color:#9aa7bd">Grid with filters</div></div>
+    </article>
+    <article class="item" data-tags="landing">
+      <div class="thumb">Agency</div>
+      <div class="meta"><b>Nova</b><div style="color:#9aa7bd">Services landing</div></div>
+    </article>
+  </div>
+</section>
+
+<section id="about" class="wrap" style="margin-top:30px">
+  <h2>About</h2>
+  <div class="card">
+    <p>I turn designs into fast, accessible frontends. I care about clean markup, scalable CSS, and a smooth handoff for future edits.</p>
+  </div>
+</section>
+
+<section id="contact" class="wrap" style="margin:30px 0">
+  <h2>Contact</h2>
+  <div class="card">
+    <form onsubmit="event.preventDefault(); alert('Message sent!');">
+      <div class="two">
+        <div><label>Name</label><input required placeholder="Your name"></div>
+        <div><label>Email</label><input required type="email" placeholder="you@email.com"></div>
+      </div>
+      <div style="margin-top:10px"><label>Message</label><textarea required placeholder="Tell me about your project"></textarea></div>
+      <div style="margin-top:12px"><button class="btn" type="submit">Send</button></div>
+    </form>
+  </div>
+</section>
+
+<footer class="wrap" style="color:var(--muted);border-top:1px solid #242b3f;padding:18px 0">
+  © 2025 Sebi — HTML/CSS, JS, React
+</footer>
+
+<div class="light" id="light">
+  <div class="box">
+    <div class="head">
+      <b id="lb-title">Project</b>
+      <span class="close" onclick="toggleLight(false)">✕</span>
+    </div>
+    <div class="body">
+      <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#243056,#141a2a);border:1px solid #2b3653;border-radius:12px;display:grid;place-items:center;color:#9fb4df">Project screenshot</div>
+      <p style="color:#cbd6ea;margin-top:10px" id="lb-desc">Short project description with goals, stack, and outcome.</p>
+      <a class="btn" style="margin-top:10px;display:inline-block" href="#" id="lb-link" target="_blank" rel="noreferrer">Open demo</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Filter
+  const buttons=[...document.querySelectorAll('.toolbar .btn')];
+  const items=[...document.querySelectorAll('.grid .item')];
+  buttons.forEach(b=>b.addEventListener('click',()=>{
+    buttons.forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    const f=b.dataset.filter;
+    items.forEach(it=>{
+      it.style.display = (f==='all'||it.dataset.tags.includes(f)) ? '' : 'none';
+    });
+  }));
+  // Lightbox
+  const lb=document.getElementById('light');
+  function toggleLight(open){ lb.style.display = open?'flex':'none'; if(!open) document.body.style.overflow=''; else document.body.style.overflow='hidden'; }
+  items.forEach((it,i)=>{
+    it.addEventListener('click',()=>{
+      document.getElementById('lb-title').textContent = it.querySelector('b').textContent;
+      document.getElementById('lb-desc').textContent = it.querySelector('.meta div').textContent;
+      document.getElementById('lb-link').href = '#';
+      toggleLight(true);
+    })
+  });
+  lb.addEventListener('click',e=>{ if(e.target===lb) toggleLight(false); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') toggleLight(false); });
+</script>
 </body>
 </html>
