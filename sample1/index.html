@@ -1,32 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Landing Page</title>
-  <style>
-    body {margin:0; font-family:Arial, sans-serif; line-height:1.6;}
-    header {background:#0a0a23; color:white; padding:40px; text-align:center;}
-    header h1 {margin:0; font-size:2.5rem;}
-    section {padding:40px; max-width:900px; margin:auto;}
-    .grid {display:grid; grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); gap:20px;}
-    .card {background:#f4f4f4; padding:20px; border-radius:10px;}
-    footer {background:#0a0a23; color:white; text-align:center; padding:20px;}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nebula — Modern SaaS Landing</title>
+<style>
+  :root{
+    --bg:#0b1020; --card:#121832; --muted:#9aa3b2; --text:#eef0f6; --acc:#6aa4ff; --acc2:#8bffed;
+    --radius:18px; --radius-sm:12px; --max:1100px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(1200px 800px at 15% -10%,#1a2447 0,#0b1020 55%),#0b1020;color:var(--text);font:15px/1.6 ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:24px}
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.55);backdrop-filter:blur(10px);border-bottom:1px solid #1f2645}
+  .nav .inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .brand{display:flex;gap:10px;align-items:center}
+  .logo{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+  .links{display:flex;gap:18px}
+  .links a{opacity:.85}
+  .links a:hover{opacity:1}
+  .hamb{display:none}
+  /* HERO */
+  .hero{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:center;padding:56px 0}
+  .badge{display:inline-flex;gap:10px;align-items:center;background:rgba(255,255,255,.06);border:1px solid #2a3565;border-radius:999px;padding:8px 12px;margin-bottom:14px}
+  .badge span{font-size:12px;color:var(--muted)}
+  h1{font-size:clamp(28px,6vw,48px);line-height:1.15;margin:6px 0 14px}
+  .lead{color:#cfd6e6;max-width:52ch}
+  .cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--acc),#3b7cff);border:none;color:#0a0f20;font-weight:700;padding:12px 16px;border-radius:12px}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid #2a3565}
+  .card{background:linear-gradient(180deg,#111736 0,#0e142d 100%);border:1px solid #1f284f;border-radius:var(--radius);padding:20px}
+  .screen{aspect-ratio:16/10;border-radius:14px;background:
+    radial-gradient(600px 260px at 80% 20%,rgba(138,255,235,.25),transparent 50%),
+    linear-gradient(180deg,#0e1430,#0b1020);border:1px solid #28315d;display:grid;place-items:center;color:#a9b6d7}
+  /* STRIP STATS */
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:14px 0 0}
+  .stat{background:rgba(255,255,255,.04);border:1px solid #24305a;border-radius:14px;padding:14px;text-align:center}
+  .stat b{display:block;font-size:22px}
+  .muted{color:var(--muted)}
+  /* FEATURES */
+  .section{padding:36px 0}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .feat{padding:18px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid #24305a}
+  .feat h3{margin:8px 0 6px}
+  /* PRICING */
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .price{border:1px solid #2a3565;border-radius:18px;padding:22px;background:linear-gradient(180deg,#101736,#0b122d)}
+  .price .tag{display:inline-block;background:rgba(107,164,255,.15);color:#9fcdff;padding:6px 10px;border-radius:999px;font-size:12px;margin-bottom:10px;border:1px solid #345aa1}
+  .price h4{margin:4px 0}
+  .n{font-size:30px}
+  ul{padding-left:18px;margin:10px 0}
+  /* TESTIMONIALS */
+  .t-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .t{background:rgba(255,255,255,.04);border:1px solid #24305a;border-radius:14px;padding:18px}
+  .t .who{margin-top:10px;color:#c9d3ea}
+  /* FAQ */
+  details{background:rgba(255,255,255,.04);border:1px solid #24305a;border-radius:12px;padding:12px}
+  details+details{margin-top:10px}
+  summary{cursor:pointer}
+  /* CTA FOOTER */
+  .big-cta{display:grid;grid-template-columns:1.4fr .6fr;gap:18px;align-items:center}
+  footer{border-top:1px solid #1f2645;color:#94a1c6;padding:26px 0;margin-top:40px}
+  /* RESPONSIVE */
+  @media (max-width: 920px){
+    .hero{grid-template-columns:1fr}
+    .grid3,.pricing,.t-grid,.big-cta{grid-template-columns:1fr}
+    .strip{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:680px){
+    .links{display:none}
+    .hamb{display:inline-flex;gap:8px;align-items:center;border:1px solid #2a3565;border-radius:10px;padding:8px 12px}
+  }
+</style>
 </head>
 <body>
-  <header>
-    <h1>Modern Business</h1>
-    <p>Clean & responsive one-page design</p>
+  <nav class="nav">
+    <div class="wrap inner">
+      <div class="brand"><div class="logo"></div><b>Nebula</b></div>
+      <div class="links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#get">Get Started</a>
+      </div>
+      <button class="hamb" onclick="document.querySelector('.links').style.display = (getComputedStyle(document.querySelector('.links')).display==='none'?'flex':'none')">Menu ▾</button>
+    </div>
+  </nav>
+
+  <header class="wrap hero">
+    <div>
+      <div class="badge"><span>NEW</span><span>v2.1 ships with 10× faster builds</span></div>
+      <h1>Launch smarter. Scale faster.</h1>
+      <p class="lead">A modern toolkit for shipping SaaS in days, not months. Components, auth, billing, analytics — already wired and production-ready.</p>
+      <div class="cta">
+        <a class="btn" href="#get">Start Free</a>
+        <a class="btn ghost" href="#pricing">See Pricing</a>
+      </div>
+      <div class="strip" style="margin-top:24px">
+        <div class="stat"><b>12k+</b><span class="muted">Deploys</span></div>
+        <div class="stat"><b>98%</b><span class="muted">CSAT</span></div>
+        <div class="stat"><b>150ms</b><span class="muted">TTFB Global</span></div>
+        <div class="stat"><b>99.98%</b><span class="muted">Uptime</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="screen">App preview / video placeholder</div>
+      <p class="muted" style="margin-top:10px">Drop in your screenshot or Loom embed here.</p>
+    </div>
   </header>
-  <section>
-    <h2>Our Services</h2>
-    <div class="grid">
-      <div class="card">Web Development</div>
-      <div class="card">UI/UX Design</div>
-      <div class="card">SEO Optimization</div>
+
+  <section id="features" class="wrap section">
+    <h2>Features</h2>
+    <div class="grid3" style="margin-top:14px">
+      <div class="feat"><h3>Auth & Users</h3><p class="muted">Email, magic links, OAuth, teams, roles — all pre-wired.</p></div>
+      <div class="feat"><h3>Billing</h3><p class="muted">Stripe subscriptions with trials, coupons, invoices.</p></div>
+      <div class="feat"><h3>Analytics</h3><p class="muted">Privacy-first product analytics and dashboards.</p></div>
+      <div class="feat"><h3>CMS</h3><p class="muted">Docs & blog baked in with MDX.</p></div>
+      <div class="feat"><h3>API</h3><p class="muted">Typed REST/GraphQL, SDKs, webhooks, rate-limits.</p></div>
+      <div class="feat"><h3>DevEx</h3><p class="muted">CLI, templates, CI/CD ready out of the box.</p></div>
     </div>
   </section>
-  <footer>&copy; 2025 Modern Business</footer>
+
+  <section id="pricing" class="wrap section">
+    <h2>Pricing</h2>
+    <div class="pricing" style="margin-top:14px">
+      <div class="price">
+        <span class="tag">Starter</span>
+        <h4>For side projects</h4>
+        <div class="n">$0</div>
+        <ul>
+          <li>1 environment</li><li>Basic auth</li><li>Community support</li>
+        </ul>
+        <a class="btn" href="#get">Choose</a>
+      </div>
+      <div class="price" style="outline:2px solid #345aa1">
+        <span class="tag">Pro</span>
+        <h4>For startups</h4>
+        <div class="n">$29/mo</div>
+        <ul>
+          <li>3 environments</li><li>Stripe billing</li><li>Analytics</li><li>Email support</li>
+        </ul>
+        <a class="btn" href="#get">Choose</a>
+      </div>
+      <div class="price">
+        <span class="tag">Scale</span>
+        <h4>For teams</h4>
+        <div class="n">$99/mo</div>
+        <ul>
+          <li>Unlimited envs</li><li>SAML/SSO</li><li>Priority support</li>
+        </ul>
+        <a class="btn" href="#get">Contact Sales</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <h2>What users say</h2>
+    <div class="t-grid" style="margin-top:14px">
+      <div class="t">“We shipped our MVP in a weekend. Unreal velocity.”<div class="who">— Zoe, Founder</div></div>
+      <div class="t">“Docs, billing, auth — zero glue code. A dream.”<div class="who">— Marco, CTO</div></div>
+      <div class="t">“Switched from our custom stack. 40% fewer bugs.”<div class="who">— Ada, PM</div></div>
+    </div>
+  </section>
+
+  <section id="faq" class="wrap section">
+    <h2>FAQ</h2>
+    <details><summary>Can I self-host?</summary><p class="muted">Yes. Docker images and Terraform modules included.</p></details>
+    <details><summary>Is there an agency plan?</summary><p class="muted">We offer multi-tenant agency plans. Contact sales.</p></details>
+  </section>
+
+  <section id="get" class="wrap section big-cta">
+    <div class="card">
+      <h2>Ready to build?</h2>
+      <p class="muted">Create an account and deploy your first project in minutes.</p>
+      <div class="cta"><a class="btn" href="#">Create account</a><a class="btn ghost" href="#">Book demo</a></div>
+    </div>
+    <div class="card">
+      <form onsubmit="event.preventDefault(); alert('Thanks! Check your inbox.')">
+        <label>Email</label>
+        <input required type="email" placeholder="you@company.com" style="width:100%;margin:6px 0 12px;padding:12px;border-radius:10px;border:1px solid #2a3565;background:#0b122d;color:var(--text)">
+        <button class="btn" style="width:100%">Get invite</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">© 2025 Nebula, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></div>
+  </footer>
 </body>
 </html>
