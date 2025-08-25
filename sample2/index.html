@@ -1,172 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sebi — Portfolio Pro</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Studio Aurora — Design & Web</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#0e1117;--card:#141925;--text:#e9edf6;--muted:#9aa7bd;--acc:#59c1ff;--max:1100px;--r:18px}
+  :root{
+    --bg:#f7f8fb; --paper:#ffffff; --ink:#14181f; --muted:#5f6b7a;
+    --brand:#67bfa3; --brand2:#8ec5ff; --max:1100px; --r:18px;
+  }
   *{box-sizing:border-box}
-  body{margin:0;background:radial-gradient(1200px 800px at 10% -10%,#1b2136,#0e1117),#0e1117;color:var(--text);font:15px/1.6 system-ui,Segoe UI,Roboto,Arial}
+  body{margin:0;background:linear-gradient(180deg,#f7f9ff,#f7f8fb);color:var(--ink);font:16px/1.6 Inter,system-ui,Segoe UI,Roboto,Arial}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-  .nav{position:sticky;top:0;z-index:40;background:rgba(14,17,23,.65);backdrop-filter:blur(10px);border-bottom:1px solid #242b3f}
-  .nav .in{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
+  /* NAV */
+  .nav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-bottom:1px solid #e6ecf5}
+  .nav .in{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
   .brand{display:flex;gap:10px;align-items:center}
-  .dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#59c1ff,#9bffdc)}
-  .links{display:flex;gap:16px}
-  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:40px 0}
-  h1{font-size:clamp(28px,6vw,44px);margin:0}
-  .lead{color:#cbd6ea}
-  .card{background:linear-gradient(180deg,#141a2a,#121623);border:1px solid #26304a;border-radius:var(--r);padding:20px}
-  .skills{display:flex;gap:10px;flex-wrap:wrap}
-  .chip{border:1px solid #2b3653;border-radius:999px;padding:8px 12px;color:#bcd0ee;background:rgba(255,255,255,.04)}
-  /* FILTER */
-  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
-  .btn{border:1px solid #2b3653;background:#121623;color:var(--text);border-radius:10px;padding:8px 12px;cursor:pointer}
-  .btn.active{outline:2px solid #3568a8}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .item{border:1px solid #2b3653;border-radius:14px;overflow:hidden;background:#111522;cursor:pointer}
-  .thumb{aspect-ratio:16/10;background:linear-gradient(135deg,#2a3352,#171c2e);display:grid;place-items:center;color:#9fb4df}
+  .mark{width:28px;height:28px;border-radius:8px;background:
+    radial-gradient(18px 18px at 60% 35%,#c5f5e6,transparent 60%),
+    linear-gradient(135deg,#67bfa3,#8ec5ff)}
+  .links{display:flex;gap:18px}
+  .btn{padding:10px 14px;border-radius:999px;border:1px solid #d7e1ef;background:#fff}
+  /* HERO */
+  header{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:48px 0}
+  h1{font:700 clamp(28px,6vw,48px)/1.2 "EB Garamond",serif;margin:0}
+  .lead{color:var(--muted);max-width:60ch}
+  .card{background:var(--paper);border:1px solid #e6ecf5;border-radius:var(--r);padding:20px}
+  .mock{aspect-ratio:16/10;border-radius:14px;border:1px dashed #d7e1ef;background:
+    linear-gradient(180deg,#fdfefe,#f7f9ff);display:grid;place-items:center;color:#8ea1b8}
+  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+  .btn.pill{background:linear-gradient(135deg,#67bfa3,#8ec5ff);border:none;color:#0b1b16;font-weight:700}
+  /* SERVICES */
+  .section{padding:30px 0}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .svc{background:#fff;border:1px solid #e6ecf5;border-radius:16px;padding:18px}
+  .svc h3{margin:6px 0 4px;font-family:"EB Garamond",serif}
+  /* WORK */
+  .masonry{columns:3;column-gap:18px}
+  .item{break-inside:avoid;border-radius:16px;overflow:hidden;background:#fff;border:1px solid #e6ecf5;margin:0 0 18px}
+  .thumb{aspect-ratio:4/3;background:linear-gradient(135deg,#e9f6ff,#e9fff5);display:grid;place-items:center;color:#7fa8c6}
   .meta{padding:12px}
-  /* LIGHTBOX */
-  .light{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;padding:24px}
-  .light .box{max-width:900px;width:100%;background:#0f1424;border:1px solid #2b3653;border-radius:16px;overflow:hidden}
-  .light .head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid #273150}
-  .light .body{padding:16px}
-  .close{cursor:pointer}
+  /* TESTIMONIALS */
+  .test{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .q{background:#fff;border:1px solid #e6ecf5;border-radius:16px;padding:18px;color:#2a3644}
   /* CONTACT */
-  form input, form textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #2b3653;background:#0e1323;color:var(--text)}
+  form input,form textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #d7e1ef;background:#fff}
   form textarea{min-height:110px;resize:vertical}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  @media (max-width:900px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
-  @media (max-width:620px){.links{display:none}.grid{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+  footer{border-top:1px solid #e6ecf5;color:#70839a;padding:24px 0;margin-top:36px}
+  @media (max-width:960px){header{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.test{grid-template-columns:1fr 1fr}.masonry{columns:2}}
+  @media (max-width:640px){.links{display:none}.grid3,.test{grid-template-columns:1fr}.masonry{columns:1}}
 </style>
 </head>
 <body>
 <nav class="nav">
   <div class="wrap in">
-    <div class="brand"><div class="dot"></div><b>Sebi</b></div>
+    <div class="brand"><div class="mark"></div><b>Studio Aurora</b></div>
     <div class="links">
-      <a href="#about">About</a><a href="#work">Projects</a><a href="#contact">Contact</a>
+      <a href="#services">Services</a><a href="#work">Work</a><a href="#contact">Contact</a>
+      <a class="btn" href="#brief">Start a Project</a>
     </div>
   </div>
 </nav>
 
-<header class="wrap hero">
+<header class="wrap">
   <div>
-    <h1>Frontend Developer & Problem-Solver</h1>
-    <p class="lead">I build fast, responsive websites and micro-apps with clean HTML/CSS and a focus on UX and performance.</p>
-    <div class="card" style="margin-top:14px">
-      <div class="skills">
-        <span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">Responsive</span><span class="chip">Accessibility</span><span class="chip">Vanilla JS</span><span class="chip">React</span><span class="chip">Performance</span>
-      </div>
+    <h1>Quiet design, bold results.</h1>
+    <p class="lead">Branding, web design, and fast front-end builds for founders who value clarity and craft.</p>
+    <div class="cta">
+      <a class="btn pill" href="#brief">Get a quote</a>
+      <a class="btn" href="#work">See our work</a>
     </div>
   </div>
   <div class="card">
-    <div class="thumb">Drop portfolio mockup image here</div>
-    <p style="color:#9fb4df;margin:10px 0 0">Lighthouse 95+ / Mobile-first</p>
+    <div class="mock">Project screenshot placeholder</div>
+    <p style="color:#6f869e;margin:10px 0 0">Drop in real mockups to elevate credibility.</p>
   </div>
 </header>
 
-<section id="work" class="wrap">
-  <h2>Projects</h2>
-  <div class="toolbar">
-    <button class="btn active" data-filter="all">All</button>
-    <button class="btn" data-filter="landing">Landing</button>
-    <button class="btn" data-filter="ecom">E-commerce</button>
-    <button class="btn" data-filter="app">Web App</button>
+<section id="services" class="wrap section">
+  <h2 style="font-family:'EB Garamond',serif;margin:0 0 10px">Services</h2>
+  <div class="grid3">
+    <div class="svc"><h3>Brand Identity</h3><p>Logo, palette, typography, guidelines.</p></div>
+    <div class="svc"><h3>Web Design</h3><p>UX/UI, responsive systems, components.</p></div>
+    <div class="svc"><h3>Development</h3><p>Clean HTML/CSS/JS, performance, a11y.</p></div>
   </div>
-  <div class="grid" id="grid">
-    <article class="item" data-tags="landing">
-      <div class="thumb">Landing — SaaS</div>
-      <div class="meta"><b>Nebula</b><div style="color:#9aa7bd">SaaS one-pager</div></div>
+</section>
+
+<section id="work" class="wrap section">
+  <h2 style="font-family:'EB Garamond',serif;margin:0 0 10px">Selected Work</h2>
+  <div class="masonry">
+    <article class="item">
+      <div class="thumb">E-commerce Redesign</div>
+      <div class="meta"><b>Olive & Sage</b><div style="color:#6f869e">+18% conv · Headless storefront</div></div>
     </article>
-    <article class="item" data-tags="ecom">
-      <div class="thumb">Storefront</div>
-      <div class="meta"><b>Mercury</b><div style="color:#9aa7bd">Minimal e-commerce</div></div>
+    <article class="item">
+      <div class="thumb">SaaS Dashboard</div>
+      <div class="meta"><b>Ledgerly</b><div style="color:#6f869e">Design system · Charts</div></div>
     </article>
-    <article class="item" data-tags="app">
-      <div class="thumb">Dashboard</div>
-      <div class="meta"><b>Orion</b><div style="color:#9aa7bd">Analytics micro-app</div></div>
+    <article class="item">
+      <div class="thumb">Portfolio</div>
+      <div class="meta"><b>Photographer</b><div style="color:#6f869e">Editorial grid · CMS</div></div>
     </article>
-    <article class="item" data-tags="landing app">
-      <div class="thumb">Product</div>
-      <div class="meta"><b>Atlas</b><div style="color:#9aa7bd">Product page + demo</div></div>
-    </article>
-    <article class="item" data-tags="ecom">
-      <div class="thumb">Catalog</div>
-      <div class="meta"><b>Lyra</b><div style="color:#9aa7bd">Grid with filters</div></div>
-    </article>
-    <article class="item" data-tags="landing">
-      <div class="thumb">Agency</div>
-      <div class="meta"><b>Nova</b><div style="color:#9aa7bd">Services landing</div></div>
+    <article class="item">
+      <div class="thumb">Landing</div>
+      <div class="meta"><b>Wave</b><div style="color:#6f869e">A/B tested hero · 1.9s LCP</div></div>
     </article>
   </div>
 </section>
 
-<section id="about" class="wrap" style="margin-top:30px">
-  <h2>About</h2>
-  <div class="card">
-    <p>I turn designs into fast, accessible frontends. I care about clean markup, scalable CSS, and a smooth handoff for future edits.</p>
+<section class="wrap section">
+  <h2 style="font-family:'EB Garamond',serif;margin:0 0 10px">What clients say</h2>
+  <div class="test">
+    <div class="q">“Effortless collaboration and gorgeous results.”<div style="color:#6f869e;margin-top:6px">— Mira, Founder</div></div>
+    <div class="q">“They shipped a pixel-perfect site in 3 days.”<div style="color:#6f869e;margin-top:6px">— Dan, PM</div></div>
+    <div class="q">“Clear communication, thoughtful design.”<div style="color:#6f869e;margin-top:6px">— Rina, COO</div></div>
   </div>
 </section>
 
-<section id="contact" class="wrap" style="margin:30px 0">
-  <h2>Contact</h2>
-  <div class="card">
-    <form onsubmit="event.preventDefault(); alert('Message sent!');">
+<section id="contact" class="wrap section">
+  <h2 style="font-family:'EB Garamond',serif;margin:0 0 10px">Contact</h2>
+  <div class="card" id="brief">
+    <form onsubmit="event.preventDefault();alert('Thanks! We’ll reply in 24h.')">
       <div class="two">
         <div><label>Name</label><input required placeholder="Your name"></div>
         <div><label>Email</label><input required type="email" placeholder="you@email.com"></div>
       </div>
-      <div style="margin-top:10px"><label>Message</label><textarea required placeholder="Tell me about your project"></textarea></div>
-      <div style="margin-top:12px"><button class="btn" type="submit">Send</button></div>
+      <div style="margin-top:10px"><label>Project</label><textarea required placeholder="Tell us about your goals, timeline, and budget."></textarea></div>
+      <div style="margin-top:12px"><button class="btn pill" type="submit">Send inquiry</button></div>
     </form>
   </div>
 </section>
 
-<footer class="wrap" style="color:var(--muted);border-top:1px solid #242b3f;padding:18px 0">
-  © 2025 Sebi — HTML/CSS, JS, React
+<footer>
+  <div class="wrap">© 2025 Studio Aurora — Branding & Web</div>
 </footer>
-
-<div class="light" id="light">
-  <div class="box">
-    <div class="head">
-      <b id="lb-title">Project</b>
-      <span class="close" onclick="toggleLight(false)">✕</span>
-    </div>
-    <div class="body">
-      <div style="aspect-ratio:16/9;background:linear-gradient(135deg,#243056,#141a2a);border:1px solid #2b3653;border-radius:12px;display:grid;place-items:center;color:#9fb4df">Project screenshot</div>
-      <p style="color:#cbd6ea;margin-top:10px" id="lb-desc">Short project description with goals, stack, and outcome.</p>
-      <a class="btn" style="margin-top:10px;display:inline-block" href="#" id="lb-link" target="_blank" rel="noreferrer">Open demo</a>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Filter
-  const buttons=[...document.querySelectorAll('.toolbar .btn')];
-  const items=[...document.querySelectorAll('.grid .item')];
-  buttons.forEach(b=>b.addEventListener('click',()=>{
-    buttons.forEach(x=>x.classList.remove('active')); b.classList.add('active');
-    const f=b.dataset.filter;
-    items.forEach(it=>{
-      it.style.display = (f==='all'||it.dataset.tags.includes(f)) ? '' : 'none';
-    });
-  }));
-  // Lightbox
-  const lb=document.getElementById('light');
-  function toggleLight(open){ lb.style.display = open?'flex':'none'; if(!open) document.body.style.overflow=''; else document.body.style.overflow='hidden'; }
-  items.forEach((it,i)=>{
-    it.addEventListener('click',()=>{
-      document.getElementById('lb-title').textContent = it.querySelector('b').textContent;
-      document.getElementById('lb-desc').textContent = it.querySelector('.meta div').textContent;
-      document.getElementById('lb-link').href = '#';
-      toggleLight(true);
-    })
-  });
-  lb.addEventListener('click',e=>{ if(e.target===lb) toggleLight(false); });
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape') toggleLight(false); });
-</script>
 </body>
 </html>
