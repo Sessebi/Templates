@@ -3,65 +3,34 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Studio Aurora — Design & Web</title>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#f7f8fb; --paper:#ffffff; --ink:#14181f; --muted:#5f6b7a;
-    --brand:#67bfa3; --brand2:#8ec5ff; --max:1100px; --r:18px;
-  }
+  :root{--bg:#f7f8fb;--paper:#fff;--ink:#14181f;--muted:#5f6b7a;--brand:#67bfa3;--brand2:#8ec5ff;--max:1100px;--r:18px}
   *{box-sizing:border-box}
-  body{margin:0;background:linear-gradient(180deg,#f7f9ff,#f7f8fb);color:var(--ink);font:16px/1.6 Inter,system-ui,Segoe UI,Roboto,Arial}
-  a{color:inherit;text-decoration:none}
+  body{margin:0;background:linear-gradient(180deg,#f7f9ff,#f7f8fb);color:var(--ink);font:16px/1.6 Inter,Arial}
+  a{text-decoration:none;color:inherit}
   .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-  /* NAV */
-  .nav{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);border-bottom:1px solid #e6ecf5}
+  .nav{position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid #e6ecf5}
   .nav .in{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
-  .brand{display:flex;gap:10px;align-items:center}
-  .mark{width:28px;height:28px;border-radius:8px;background:
-    radial-gradient(18px 18px at 60% 35%,#c5f5e6,transparent 60%),
-    linear-gradient(135deg,#67bfa3,#8ec5ff)}
+  .brand{display:flex;align-items:center;gap:10px}
+  .mark{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#67bfa3,#8ec5ff)}
   .links{display:flex;gap:18px}
-  .btn{padding:10px 14px;border-radius:999px;border:1px solid #d7e1ef;background:#fff}
-  /* HERO */
   header{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:48px 0}
   h1{font:700 clamp(28px,6vw,48px)/1.2 "EB Garamond",serif;margin:0}
-  .lead{color:var(--muted);max-width:60ch}
-  .card{background:var(--paper);border:1px solid #e6ecf5;border-radius:var(--r);padding:20px}
-  .mock{aspect-ratio:16/10;border-radius:14px;border:1px dashed #d7e1ef;background:
-    linear-gradient(180deg,#fdfefe,#f7f9ff);display:grid;place-items:center;color:#8ea1b8}
-  .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
-  .btn.pill{background:linear-gradient(135deg,#67bfa3,#8ec5ff);border:none;color:#0b1b16;font-weight:700}
-  /* SERVICES */
-  .section{padding:30px 0}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .svc{background:#fff;border:1px solid #e6ecf5;border-radius:16px;padding:18px}
-  .svc h3{margin:6px 0 4px;font-family:"EB Garamond",serif}
-  /* WORK */
-  .masonry{columns:3;column-gap:18px}
-  .item{break-inside:avoid;border-radius:16px;overflow:hidden;background:#fff;border:1px solid #e6ecf5;margin:0 0 18px}
-  .thumb{aspect-ratio:4/3;background:linear-gradient(135deg,#e9f6ff,#e9fff5);display:grid;place-items:center;color:#7fa8c6}
-  .meta{padding:12px}
-  /* TESTIMONIALS */
-  .test{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .q{background:#fff;border:1px solid #e6ecf5;border-radius:16px;padding:18px;color:#2a3644}
-  /* CONTACT */
-  form input,form textarea{width:100%;padding:12px;border-radius:12px;border:1px solid #d7e1ef;background:#fff}
-  form textarea{min-height:110px;resize:vertical}
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  footer{border-top:1px solid #e6ecf5;color:#70839a;padding:24px 0;margin-top:36px}
-  @media (max-width:960px){header{grid-template-columns:1fr}.grid3{grid-template-columns:1fr 1fr}.test{grid-template-columns:1fr 1fr}.masonry{columns:2}}
-  @media (max-width:640px){.links{display:none}.grid3,.test{grid-template-columns:1fr}.masonry{columns:1}}
+  .lead{color:var(--muted)}
+  .btn{padding:10px 14px;border-radius:999px;background:#fff;border:1px solid #d7e1ef}
+  .btn.pill{background:linear-gradient(135deg,#67bfa3,#8ec5ff);border:none;color:#fff;font-weight:700}
+  .card{background:#fff;border:1px solid #e6ecf5;border-radius:var(--r);padding:20px}
+  .mock{aspect-ratio:16/10;border:1px solid #d7e1ef;border-radius:14px;overflow:hidden}
+  .mock img{width:100%;display:block}
+  @media(max-width:900px){header{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <nav class="nav">
   <div class="wrap in">
     <div class="brand"><div class="mark"></div><b>Studio Aurora</b></div>
-    <div class="links">
-      <a href="#services">Services</a><a href="#work">Work</a><a href="#contact">Contact</a>
-      <a class="btn" href="#brief">Start a Project</a>
-    </div>
+    <div class="links"><a href="#services">Services</a><a href="#work">Work</a><a href="#contact">Contact</a></div>
   </div>
 </nav>
 
@@ -69,73 +38,16 @@
   <div>
     <h1>Quiet design, bold results.</h1>
     <p class="lead">Branding, web design, and fast front-end builds for founders who value clarity and craft.</p>
-    <div class="cta">
-      <a class="btn pill" href="#brief">Get a quote</a>
-      <a class="btn" href="#work">See our work</a>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px">
+      <a class="btn pill" href="#">Get a quote</a>
+      <a class="btn" href="#">See our work</a>
     </div>
   </div>
   <div class="card">
-    <div class="mock">Project screenshot placeholder</div>
-    <p style="color:#6f869e;margin:10px 0 0">Drop in real mockups to elevate credibility.</p>
+    <div class="mock">
+      <img src="assets/aurora.svg" alt="Aurora screenshot">
+    </div>
   </div>
 </header>
-
-<section id="services" class="wrap section">
-  <h2 style="font-family:'EB Garamond',serif;margin:0 0 10px">Services</h2>
-  <div class="grid3">
-    <div class="svc"><h3>Brand Identity</h3><p>Logo, palette, typography, guidelines.</p></div>
-    <div class="svc"><h3>Web Design</h3><p>UX/UI, responsive systems, components.</p></div>
-    <div class="svc"><h3>Development</h3><p>Clean HTML/CSS/JS, performance, a11y.</p></div>
-  </div>
-</section>
-
-<section id="work" class="wrap section">
-  <h2 style="font-family:'EB Garamond',serif;margin:0 0 10px">Selected Work</h2>
-  <div class="masonry">
-    <article class="item">
-      <div class="thumb">E-commerce Redesign</div>
-      <div class="meta"><b>Olive & Sage</b><div style="color:#6f869e">+18% conv · Headless storefront</div></div>
-    </article>
-    <article class="item">
-      <div class="thumb">SaaS Dashboard</div>
-      <div class="meta"><b>Ledgerly</b><div style="color:#6f869e">Design system · Charts</div></div>
-    </article>
-    <article class="item">
-      <div class="thumb">Portfolio</div>
-      <div class="meta"><b>Photographer</b><div style="color:#6f869e">Editorial grid · CMS</div></div>
-    </article>
-    <article class="item">
-      <div class="thumb">Landing</div>
-      <div class="meta"><b>Wave</b><div style="color:#6f869e">A/B tested hero · 1.9s LCP</div></div>
-    </article>
-  </div>
-</section>
-
-<section class="wrap section">
-  <h2 style="font-family:'EB Garamond',serif;margin:0 0 10px">What clients say</h2>
-  <div class="test">
-    <div class="q">“Effortless collaboration and gorgeous results.”<div style="color:#6f869e;margin-top:6px">— Mira, Founder</div></div>
-    <div class="q">“They shipped a pixel-perfect site in 3 days.”<div style="color:#6f869e;margin-top:6px">— Dan, PM</div></div>
-    <div class="q">“Clear communication, thoughtful design.”<div style="color:#6f869e;margin-top:6px">— Rina, COO</div></div>
-  </div>
-</section>
-
-<section id="contact" class="wrap section">
-  <h2 style="font-family:'EB Garamond',serif;margin:0 0 10px">Contact</h2>
-  <div class="card" id="brief">
-    <form onsubmit="event.preventDefault();alert('Thanks! We’ll reply in 24h.')">
-      <div class="two">
-        <div><label>Name</label><input required placeholder="Your name"></div>
-        <div><label>Email</label><input required type="email" placeholder="you@email.com"></div>
-      </div>
-      <div style="margin-top:10px"><label>Project</label><textarea required placeholder="Tell us about your goals, timeline, and budget."></textarea></div>
-      <div style="margin-top:12px"><button class="btn pill" type="submit">Send inquiry</button></div>
-    </form>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">© 2025 Studio Aurora — Branding & Web</div>
-</footer>
 </body>
 </html>
