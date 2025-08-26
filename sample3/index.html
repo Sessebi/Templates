@@ -2,48 +2,118 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HARDMODE — Brutalist Template</title>
+<title>HARDMODE — Build Fast or Die Trying</title>
 <style>
-  :root{--bg:#0a0a0a;--accent:#ffea00;--max:1100px}
+  :root{
+    --bg:#0a0a0a; --ink:#111; --paper:#fff; --muted:#666; --accent:#ffea00;
+    --max:1200px; --r:8px;
+  }
   *{box-sizing:border-box}
-  body{margin:0;background:#0a0a0a;color:#f3f3f3;font:16px/1.6 monospace}
+  html,body{margin:0;background:var(--bg);color:#f3f3f3);font:16px/1.6 ui-monospace,Menlo,Consolas,monospace}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:var(--max);margin:0 auto;padding:24px}
-  .bar{background:#0a0a0a;border-bottom:3px solid var(--accent);position:sticky;top:0}
+  .wrap{max-width:var(--max);margin:0 auto;padding:20px}
+  /* HEADER */
+  .bar{position:sticky;top:0;z-index:50;background:#0a0a0a;border-bottom:3px solid var(--accent)}
   .bar .in{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
-  .logo{font-weight:900;font-size:20px;color:var(--accent)}
+  .logo{font-weight:800;letter-spacing:1px;background:linear-gradient(90deg,var(--accent),#fff);-webkit-background-clip:text;background-clip:text;color:transparent}
   .nav{display:flex;gap:18px}
-  .btn{background:var(--accent);color:#000;border:3px solid #000;padding:10px 12px;font-weight:800}
+  .btn{background:var(--accent);color:#000;border:3px solid #000;padding:10px 12px;border-radius:0;font-weight:800}
+  /* HERO */
+  header{border-bottom:3px solid #1a1a1a}
   .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;padding:36px 0}
-  h1{font-size:clamp(28px,6vw,52px);font-weight:900;text-transform:uppercase;margin:0}
-  .panel{border:3px solid #222;background:#111;padding:16px}
-  .mock{aspect-ratio:16/10;border:3px solid #333;overflow:hidden}
-  .mock img{width:100%;display:block}
-  @media(max-width:900px){.hero{grid-template-columns:1fr}}
+  h1{font-size:clamp(28px,7vw,56px);line-height:1.05;margin:0;font-weight:900;text-transform:uppercase}
+  .lead{color:#d7d7d7}
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+  .stat{border:3px solid #222;background:#111;padding:12px;text-align:center}
+  /* PANELS */
+  .section{padding:28px 0;border-bottom:3px solid #1a1a1a}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .panel{border:3px solid #222;background:#0f0f0f;padding:16px}
+  .panel h3{margin:6px 0;text-transform:uppercase}
+  /* COMPARE TABLE */
+  table{width:100%;border-collapse:collapse;border:3px solid #222;background:#0f0f0f}
+  th,td{border-top:3px solid #222;padding:10px;text-align:left}
+  th{background:#111}
+  /* SCHEDULE */
+  .sched{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .slot{border:3px solid #222;background:#0f0f0f;padding:14px}
+  /* FOOTER */
+  footer{padding:24px 0;color:#cfcfcf}
+  /* RESPONSIVE */
+  @media (max-width:960px){.hero{grid-template-columns:1fr}.grid3,.sched{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="bar">
-  <div class="wrap in">
-    <div class="logo">HARDMODE</div>
-    <div class="nav"><a href="#features">Features</a><a href="#compare">Compare</a></div>
+  <div class="bar">
+    <div class="wrap in">
+      <div class="logo">HARDMODE</div>
+      <div class="nav">
+        <a href="#features">Features</a><a href="#compare">Compare</a><a href="#tickets">Tickets</a>
+        <a class="btn" href="#tickets">Get Ticket</a>
+      </div>
+    </div>
   </div>
-</div>
 
-<header class="wrap hero">
-  <div>
-    <h1>Build fast or die trying.</h1>
-    <p>A brutalist one-page template with zero fluff.</p>
-    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
-      <a class="btn" href="#">Join Now</a>
-      <a class="btn" style="background:#fff" href="#">Rules</a>
+  <header class="wrap">
+    <div class="hero">
+      <div>
+        <h1>Build fast or die trying.</h1>
+        <p class="lead">A no-nonsense template for hackathons, product sprints, or loud product announcements. Minimal CSS, maximal punch.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+          <a class="btn" href="#tickets">Join Now</a>
+          <a class="btn" style="background:#fff" href="#features">Read the Rules</a>
+        </div>
+        <div class="strip">
+          <div class="stat"><b>48h</b><div>Time limit</div></div>
+          <div class="stat"><b>0 BS</b><div>Meetings</div></div>
+          <div class="stat"><b>100%</b><div>Focus</div></div>
+          <div class="stat"><b>★ ★ ★</b><div>Prizes</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div style="aspect-ratio:16/10;border:3px dashed #333;display:grid;place-items:center;color:#bdbdbd">Big graphic / poster</div>
+        <p style="color:#cfcfcf;margin:10px 0 0">Swap with a bold poster image or video.</p>
+      </div>
     </div>
-  </div>
-  <div class="panel">
-    <div class="mock">
-      <img src="assets/hardmode.svg" alt="Hardmode screenshot">
+  </header>
+
+  <section id="features" class="wrap section">
+    <h2 style="text-transform:uppercase;margin:0 0 10px">Core Features</h2>
+    <div class="grid3">
+      <div class="panel"><h3>Speed</h3><p>Zero frameworks. Pure HTML/CSS. Loads instantly.</p></div>
+      <div class="panel"><h3>Clarity</h3><p>Monospace, hard borders, loud hierarchy.</p></div>
+      <div class="panel"><h3>Control</h3><p>Everything in one file. Edit and ship in minutes.</p></div>
     </div>
-  </div>
-</header>
+  </section>
+
+  <section id="compare" class="wrap section">
+    <h2 style="text-transform:uppercase;margin:0 0 10px">Compare</h2>
+    <table>
+      <tr><th>Thing</th><th>HARDMODE</th><th>Bloated Theme</th></tr>
+      <tr><td>Page weight</td><td>&lt; 15 KB</td><td>&gt; 1 MB</td></tr>
+      <tr><td>Dependencies</td><td>None</td><td>Many</td></tr>
+      <tr><td>Editing</td><td>1 file</td><td>Hundreds</td></tr>
+    </table>
+  </section>
+
+  <section id="tickets" class="wrap section">
+    <h2 style="text-transform:uppercase;margin:0 0 10px">Schedule & Tickets</h2>
+    <div class="sched">
+      <div class="slot"><b>Day 1</b><div>Kickoff · Team up · Build</div></div>
+      <div class="slot"><b>Day 2</b><div>Polish · Demos · Awards</div></div>
+      <div class="slot"><b>Venue</b><div>Online · Anywhere</div></div>
+      <div class="slot">
+        <form onsubmit="event.preventDefault();alert('Ticket reserved — check your inbox!')">
+          <label>Email</label>
+          <input required type="email" placeholder="you@fast.dev" style="width:100%;margin:8px 0;padding:10px;border:3px solid #222;background:#0a0a0a;color:#f5f5f5">
+          <button class="btn" style="width:100%">Reserve Ticket</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap">
+    © 2025 HARDMODE — No fluff. Just ship.
+  </footer>
 </body>
 </html>
